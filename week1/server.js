@@ -4,7 +4,7 @@ const res = require("express/lib/response");
 //create an express object
 const app = express();
 //Bind port
-const port = 3040;
+const port = 3000;
 
 //Simple addition function
 const addTwoNumber = (n1, n2) => n1 + n2;
@@ -17,7 +17,17 @@ app.get("/addTwoNumbers", (req, res) => {
   const n1 = parseInt(req.query.n1);
   const n2 = parseInt(req.query.n2);
   const result = addTwoNumber(n1, n2);
-  res.json({ statuscode: 200, data: result });
+
+  const data = {
+    statuscode: 200,
+    "Number 1": n1,
+    "Number 2": n2,
+    data: result,
+  };
+  res.send(
+    JSON.stringify(data, null, 2) +
+      "\nChange the numbers in the URL for a different calculation."
+  );
 });
 
 //Outputs 19 + 12 to console
